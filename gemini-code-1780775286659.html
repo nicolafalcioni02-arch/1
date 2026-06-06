@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sondaggio Importante</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Evita che appaiano le barre di scorrimento quando il tasto scappa */
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s;
+        }
+
+        #btn-si {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #btn-si:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+
+        #btn-no {
+            background-color: #f44336;
+            color: white;
+            position: relative; /* Inizialmente normale, poi diventerà fixed per scappare */
+        }
+
+        #risultato {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #ff9800;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-container">
+        <h1 id="domanda">Nicola è il più figo??</h1>
+        
+        <div class="buttons" id="bottoni">
+            <button id="btn-si">Sì</button>
+            <button id="btn-no">No</button>
+        </div>
+
+        <div id="risultato">
+            🎉 Risposta corretta 😎👑
+        </div>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById('btn-no');
+        const btnSi = document.getElementById('btn-si');
+        const domanda = document.getElementById('domanda');
+        const bottoni = document.getElementById('bottoni');
+        const risultato = document.getElementById('risultato');
+
+        // Funzione per far scappare il tasto
+        function scappaTasto(e) {
+            // Se l'evento è un tocco su mobile, preveniamo il click reale
+            if(e.type === 'touchstart') {
+                e.preventDefault(); 
+            }
+
+            // Cambiamo la posizione in "fixed" così può volare ovunque sullo schermo
+            btnNo.style.position = 'fixed';
+
+            // Calcoliamo lo spazio disponibile sullo schermo
+            const maxX = window.innerWidth - btnNo.offsetWidth - 20;
+            const maxY = window.innerHeight - btnNo.offsetHeight - 20;
+
+            // Generiamo coordinate casuali
+            const randomX = Math.floor(Math.random() * maxX) + 10;
+            const randomY = Math.floor(Math.random() * maxY) + 10;
+
+            // Applichiamo le nuove coordinate
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        // Eventi per far scappare il tasto "No"
+        btnNo.addEventListener('mouseover', scappaTasto);   // Per il Desktop (quando passi sopra col mouse)
+        btnNo.addEventListener('touchstart', scappaTasto);  // Per il Mobile (quando provi a tappare)
+        btnNo.addEventListener('click', scappaTasto);       // Sicurezza aggiuntiva se riesci miracolosamente a cliccarlo
+
+        // Evento quando clicchi "Sì"
+        btnSi.addEventListener('click', () => {
+            domanda.innerText = "Esattamente!";
+            bottoni.style.display = 'none'; // Nasconde i bottoni
+            btnNo.style.display = 'none';   // Fa sparire il tasto no in giro per lo schermo
+            
+            risultato.style.display = 'block'; // Mostra il messaggio di vittoria
+            
+            // Effetto coriandoli basilare cambiando il colore di sfondo
+            document.body.style.backgroundColor = "#ffe4e1";
+        });
+    </script>
+</body>
+</html>
