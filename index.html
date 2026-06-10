@@ -1,354 +1,400 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Sofia APRILO IMMEDIATAMENTE!!!!</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f4f8;
-            color: #2d3748;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            text-align: center;
-            user-select: none;
-        }
-        .container {
-            background: white;
-            padding: 30px 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 85%;
-            max-width: 380px;
-            min-height: 260px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .hidden { display: none !important; }
-        
-        h2, h3 { margin-top: 0; color: #1a202c; }
-        p { font-size: 15px; color: #4a5568; margin-bottom: 20px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sofia APRI IMMEDIATAMENTE</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        button {
-            background: #3182ce;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 10px;
-            transition: background 0.2s;
-            touch-action: manipulation;
-        }
-        button:active { background: #2b6cb0; }
-        
-        .btn-red { background: #e53e3e; }
-        .btn-red:active { background: #c53030; }
-        .btn-green { background: #48bb78; }
-        .btn-green:active { background: #38a169; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #0d0d1a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: #e0e0e0;
+    overflow: hidden;
+  }
 
-        /* G1: Batterio */
-        #petri-dish {
-            position: relative;
-            width: 100%;
-            height: 160px;
-            background: #fdf6e3;
-            border: 2px solid #cbd5e0;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            overflow: hidden;
-        }
-        #microbe {
-            position: absolute;
-            font-size: 40px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: top 0.4s ease, left 0.4s ease;
-            cursor: pointer;
-        }
+  h1 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a0e0a0;
+    margin-bottom: 6px;
+    opacity: 0.85;
+  }
 
-        /* G2: Pozzetti */
-        #microplate {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        .well {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            border: 2px solid #a0aec0;
-            background: #edf2f7;
-            transition: background 0.1s;
-        }
-        .well.active {
-            background: #48bb78;
-            border-color: #38a169;
-        }
+  .subtitle {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
 
-        /* G3: Centrifuga */
-        #rpm-bar-container {
-            width: 100%;
-            height: 20px;
-            background: #edf2f7;
-            border-radius: 10px;
-            margin: 15px 0;
-            overflow: hidden;
-            position: relative;
-        }
-        #rpm-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: #ed8936;
-            transition: width 0.1s linear;
-        }
+  /* Piastra Petri */
+  .petri {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #f5f0e8 0%, #ede5cc 60%, #d4c9a8 100%);
+    border: 6px solid #b8a870;
+    box-shadow:
+      0 0 0 3px #8a7a50,
+      0 8px 40px rgba(0,0,0,0.7),
+      inset 0 2px 8px rgba(255,255,255,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 30px 20px;
+  }
 
-        /* G4: Slider */
-        input[type=range] {
-            width: 100%;
-            margin: 25px 0;
-            accent-color: #3182ce;
-        }
+  /* Linee di separazione tra righe */
+  .row-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
 
-        /* G5: Domanda Finale */
-        #moving-btn-container {
-            position: relative;
-            width: 100%;
-            height: 150px;
-            border-radius: 8px;
-            background: #f7fafc;
-            overflow: hidden;
-        }
-        .moving-btn {
-            position: absolute;
-            transition: top 0.7s ease-in-out, left 0.7s ease-in-out;
-            width: 70px;
-            padding: 10px 0;
-            margin: 0;
-        }
-    </style>
+  .row-divider {
+    width: 65%;
+    height: 1px;
+    background: rgba(160, 140, 90, 0.35);
+    margin: 2px 0;
+  }
+
+  /* Etichetta diluizione */
+  .dilution-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    padding: 6px 0;
+  }
+
+  .dilution-label {
+    font-size: 0.65rem;
+    color: #7a6a40;
+    font-style: italic;
+    width: 38px;
+    text-align: right;
+    letter-spacing: 0.5px;
+  }
+
+  /* Pallino */
+  .spot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px dashed #a09060;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .spot:hover:not(.filled) {
+    border-color: #c8a840;
+    background: rgba(200, 168, 64, 0.15);
+    transform: scale(1.15);
+  }
+
+  .spot.filled {
+    border: none;
+    cursor: default;
+    animation: growIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Diverse intensità per simulare diluizione */
+  .spot.filled.row-0 { background: radial-gradient(circle at 40% 35%, #5a2a10, #2a0e04); box-shadow: 0 2px 6px rgba(0,0,0,0.5); }
+  .spot.filled.row-1 { background: radial-gradient(circle at 40% 35%, #7a3a15, #3d1508); box-shadow: 0 2px 5px rgba(0,0,0,0.4); }
+  .spot.filled.row-2 { background: radial-gradient(circle at 40% 35%, #9c5522, #5c2a10); box-shadow: 0 2px 5px rgba(0,0,0,0.35); }
+  .spot.filled.row-3 { background: radial-gradient(circle at 40% 35%, #b87840, #7a4820); box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+  .spot.filled.row-4 { background: radial-gradient(circle at 40% 35%, #d4a870, #a07840); box-shadow: 0 2px 4px rgba(0,0,0,0.25); }
+  .spot.filled.row-5 { background: radial-gradient(circle at 40% 35%, #e8cca0, #c4a870); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+
+  @keyframes growIn {
+    0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  /* Istruzioni */
+  .instructions {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .instructions span {
+    color: #a0e0a0;
+    font-weight: 600;
+  }
+
+  /* Progress */
+  .progress {
+    margin-top: 12px;
+    font-size: 0.75rem;
+    color: #a0c0a0;
+    letter-spacing: 1px;
+  }
+
+  /* WIN OVERLAY */
+  .win-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 100;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .win-overlay.show {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .win-box {
+    background: linear-gradient(135deg, #1a2a1a, #0d1a0d);
+    border: 2px solid #50c050;
+    border-radius: 20px;
+    padding: 48px 56px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(80, 192, 80, 0.3), 0 20px 60px rgba(0,0,0,0.8);
+    animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+    max-width: 360px;
+  }
+
+  @keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .win-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    display: block;
+    animation: bounce 1s ease infinite 1s;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .win-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #80e880;
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px rgba(128, 232, 128, 0.5);
+  }
+
+  .win-message {
+    font-size: 1.1rem;
+    color: #e8e8e8;
+    line-height: 1.6;
+  }
+
+  .win-message strong {
+    color: #ffdd88;
+    font-size: 1.3rem;
+    display: block;
+    margin-top: 10px;
+  }
+
+  .confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99;
+  }
+
+  /* Reset button */
+  .reset-btn {
+    margin-top: 28px;
+    padding: 10px 28px;
+    background: transparent;
+    border: 1px solid #50c050;
+    color: #80e880;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .reset-btn:hover {
+    background: rgba(80,192,80,0.1);
+    transform: scale(1.05);
+  }
+</style>
 </head>
 <body>
 
-    <!-- Intro -->
-    <div id="step1" class="container">
-        <h2>Vediamo se sei brava....</h2>
-        <p>Oh...non provare a barare</p>
-        <button onclick="gotoStep(2)">Inizia Test</button>
+<h1>FAI GLI SPOT!!!</h1>
+
+<div class="petri" id="petri">
+  <div class="row-wrapper" id="rows-container"></div>
+</div>
+
+<div class="progress" id="progress">0 / 18 spot inoculati</div>
+
+<!-- Canvas per coriandoli -->
+<canvas class="confetti" id="confettiCanvas"></canvas>
+
+<!-- Overlay vittoria -->
+<div class="win-overlay" id="winOverlay">
+  <div class="win-box">
+    <span class="win-emoji">🏆</span>
+    <div class="win-title"></div>
+    <div class="win-message">
+      <strong>Brava, hai vinto un'uscita con Nicola!</strong>
     </div>
+    <button class="reset-btn" onclick="resetGame()">↩ Ricomincia</button>
+  </div>
+</div>
 
-    <!-- Gioco 1: Contaminante -->
-    <div id="step2" class="container hidden">
-        <h3>Test 1: Uccidi Pseudomonas</h3>
-        <p>Devi colpirlo 3 volte...pensa che sia GM</p>
-        <div id="petri-dish">
-            <div id="microbe" ontouchstart="hitMicrobe()" onmousedown="hitMicrobe()">🦠</div>
-        </div>
-        <p id="microbe-count" style="margin:0;">Eliminazione: 0/3</p>
-    </div>
+<script>
+  const ROWS = 6;
+  const SPOTS_PER_ROW = 3;
+  const DILUTIONS = ['10⁻¹', '10⁻²', '10⁻³', '10⁻⁴', '10⁻⁵', '10⁻⁶'];
 
-    <!-- Gioco 2: Pozzetti -->
-    <div id="step3" class="container hidden">
-        <h3>Test 2: Colora il Biofilm</h3>
-        <p>Riempi i pozzetti tappandoli. Sbrigati, che muoiono i pesci</p>
-        <div id="microplate">
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-            <div class="well" ontouchstart="colorWell(this)" onmousedown="colorWell(this)"></div>
-        </div>
-    </div>
+  let filled = 0;
+  const total = ROWS * SPOTS_PER_ROW;
 
-    <!-- Gioco 3: Centrifuga -->
-    <div id="step4" class="container hidden">
-        <h3>Test 3: Centrifuga</h3>
-        <p>Tappa ripetutamente il pulsante per far salire i giri fino a 14.000 RPM per pellettare (non sbiellare la centrifuga)</p>
-        <div id="rpm-bar-container">
-            <div id="rpm-bar-fill"></div>
-        </div>
-        <p id="rpm-text" style="font-weight:bold;">0 RPM</p>
-        <button ontouchstart="spinCentrifuge(event)" onmousedown="spinCentrifuge(event)">SPIN 🌀</button>
-    </div>
+  function buildGrid() {
+    const container = document.getElementById('rows-container');
+    container.innerHTML = '';
 
-    <!-- Gioco 4: Slider -->
-    <div id="step5" class="container hidden">
-        <h3>Test 4: Dai questo è semplice (ho finito la fantasia mi dispiace)</h3>
-        <p>Trascina fino in fondo in un colpo solo. Se la molli prima, scivola via.</p>
-        <input type="range" id="dna-slider" min="0" max="100" value="0" oninput="checkSlider()" ontouchend="resetSlider()" onmouseup="resetSlider()">
-    </div>
+    for (let r = 0; r < ROWS; r++) {
+      if (r > 0) {
+        const div = document.createElement('div');
+        div.className = 'row-divider';
+        container.appendChild(div);
+      }
 
-    <!-- Gioco 5: Domanda Finale -->
-    <div id="step6" class="container hidden">
-        <h3>Test 5: Finale</h3>
-        <p><br><br><b>Sofia è intelligente?</b></p>
-        <div id="moving-btn-container">
-            <button id="btn-si" class="moving-btn btn-green" ontouchstart="clickSi(event)" onmousedown="clickSi(event)">Sì</button>
-            <button id="btn-no" class="moving-btn btn-red" ontouchstart="clickNo(event)" onmousedown="clickNo(event)">No</button>
-        </div>
-    </div>
+      const row = document.createElement('div');
+      row.className = 'dilution-row';
 
-    <!-- Fine -->
-    <div id="step7" class="container hidden">
-        <h2>Brava, test superato.</h2>
-    </div>
+      const label = document.createElement('div');
+      label.className = 'dilution-label';
+      label.textContent = DILUTIONS[r];
+      row.appendChild(label);
 
-    <script>
-        let microbeMoveInterval, decayInterval, centrifugeInterval, buttonsInterval;
+      for (let s = 0; s < SPOTS_PER_ROW; s++) {
+        const spot = document.createElement('div');
+        spot.className = `spot`;
+        spot.dataset.row = r;
+        spot.dataset.col = s;
+        spot.title = `Diluizione ${DILUTIONS[r]} — replica ${s + 1}`;
+        spot.addEventListener('click', () => fillSpot(spot, r));
+        row.appendChild(spot);
+      }
 
-        function gotoStep(step) {
-            document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
-            document.getElementById('step' + step).classList.remove('hidden');
+      container.appendChild(row);
+    }
+  }
 
-            if(step === 2) startMicrobe();
-            if(step === 3) startDecay();
-            if(step === 4) startCentrifuge();
-            if(step === 6) startMovingButtons();
+  function fillSpot(el, row) {
+    if (el.classList.contains('filled')) return;
+    el.classList.add('filled', `row-${row}`);
+    filled++;
+    document.getElementById('progress').textContent = `${filled} / ${total} spot inoculati`;
+    if (filled === total) {
+      setTimeout(showWin, 600);
+    }
+  }
+
+  function showWin() {
+    document.getElementById('winOverlay').classList.add('show');
+    startConfetti();
+  }
+
+  function resetGame() {
+    filled = 0;
+    document.getElementById('progress').textContent = `0 / ${total} spot inoculati`;
+    document.getElementById('winOverlay').classList.remove('show');
+    stopConfetti();
+    buildGrid();
+  }
+
+  // ---- Confetti ----
+  let confettiAnim;
+  const particles = [];
+
+  function startConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    const colors = ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#f857a6','#ffb347'];
+
+    for (let i = 0; i < 120; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: -10 - Math.random() * 200,
+        vx: (Math.random() - 0.5) * 3,
+        vy: 2 + Math.random() * 4,
+        size: 6 + Math.random() * 8,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rot: Math.random() * Math.PI * 2,
+        rotV: (Math.random() - 0.5) * 0.15
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+        ctx.restore();
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.rotV;
+        if (p.y > canvas.height) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
         }
+      });
+      confettiAnim = requestAnimationFrame(draw);
+    }
+    draw();
+  }
 
-        // --- G1: Batterio ---
-        let microbeHits = 0;
-        function startMicrobe() {
-            const microbe = document.getElementById('microbe');
-            const dish = document.getElementById('petri-dish');
-            microbeMoveInterval = setInterval(() => {
-                const maxX = dish.clientWidth - 50;
-                const maxY = dish.clientHeight - 50;
-                microbe.style.left = Math.floor(Math.random() * maxX) + 'px';
-                microbe.style.top = Math.floor(Math.random() * maxY) + 'px';
-            }, 600); 
-        }
+  function stopConfetti() {
+    cancelAnimationFrame(confettiAnim);
+    const canvas = document.getElementById('confettiCanvas');
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    particles.length = 0;
+  }
 
-        function hitMicrobe() {
-            microbeHits++;
-            document.getElementById('microbe-count').innerText = `Eliminazione: ${microbeHits}/3`;
-            if (microbeHits >= 3) {
-                clearInterval(microbeMoveInterval);
-                document.getElementById('microbe').innerHTML = '💥';
-                setTimeout(() => gotoStep(3), 600);
-            }
-        }
-
-        // --- G2: Pozzetti ---
-        let activeWells = 0;
-        function colorWell(el) {
-            if (!el.classList.contains('active')) {
-                el.classList.add('active');
-                activeWells++;
-                if (activeWells === 9) {
-                    clearInterval(decayInterval);
-                    setTimeout(() => gotoStep(4), 400);
-                }
-            }
-        }
-
-        function startDecay() {
-            decayInterval = setInterval(() => {
-                let activeEls = document.querySelectorAll('.well.active');
-                if (activeEls.length > 0) {
-                    let random = Math.floor(Math.random() * activeEls.length);
-                    activeEls[random].classList.remove('active');
-                    activeWells--;
-                }
-            }, 800); 
-        }
-
-        // --- G3: Centrifuga ---
-        let rpm = 0;
-        function startCentrifuge() {
-            centrifugeInterval = setInterval(() => {
-                if (rpm > 0) rpm -= 400; 
-                if (rpm < 0) rpm = 0;
-                updateCentrifugeUI();
-            }, 200);
-        }
-
-        function spinCentrifuge(e) {
-            e.preventDefault();
-            rpm += 1200; 
-            if (rpm >= 14000) {
-                rpm = 14000;
-                updateCentrifugeUI();
-                clearInterval(centrifugeInterval);
-                setTimeout(() => gotoStep(5), 500);
-            } else {
-                updateCentrifugeUI();
-            }
-        }
-
-        function updateCentrifugeUI() {
-            document.getElementById('rpm-text').innerText = `${rpm} RPM`;
-            let percent = (rpm / 14000) * 100;
-            document.getElementById('rpm-bar-fill').style.width = percent + '%';
-        }
-
-        // --- G4: Slider ---
-        function checkSlider() {
-            const slider = document.getElementById('dna-slider');
-            if (slider.value == 100) {
-                setTimeout(() => gotoStep(6), 300);
-            }
-        }
-        
-        function resetSlider() {
-            const slider = document.getElementById('dna-slider');
-            if (slider.value < 100) {
-                slider.value = 0; 
-            }
-        }
-
-        // --- G5: Domanda Finale (Bottoni in movimento) ---
-        function startMovingButtons() {
-            const btnSi = document.getElementById('btn-si');
-            const btnNo = document.getElementById('btn-no');
-            const container = document.getElementById('moving-btn-container');
-
-            function move() {
-                // Calcola lo spazio disponibile sottraendo la larghezza/altezza dei bottoni
-                const maxX = container.clientWidth - 70; 
-                const maxY = container.clientHeight - 45;
-
-                btnSi.style.left = Math.floor(Math.random() * maxX) + 'px';
-                btnSi.style.top = Math.floor(Math.random() * maxY) + 'px';
-
-                btnNo.style.left = Math.floor(Math.random() * maxX) + 'px';
-                btnNo.style.top = Math.floor(Math.random() * maxY) + 'px';
-            }
-
-            // Muove i bottoni subito all'avvio della fase
-            move();
-            
-            // Continua a farli muovere ogni 700ms
-            buttonsInterval = setInterval(move, 700);
-        }
-
-        function clickNo(e) {
-            e.preventDefault();
-            alert('Risposta sbagliata');
-        }
-
-        function clickSi(e) {
-            e.preventDefault();
-            clearInterval(buttonsInterval); // Ferma il movimento
-            gotoStep(7); // Vai alla fine
-        }
-    </script>
+  buildGrid();
+</script>
 </body>
 </html>
